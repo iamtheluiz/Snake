@@ -1,0 +1,18 @@
+html{
+	background-color:black;
+	width:100%;
+}
+#game{
+	margin:0 auto;
+	width:600px;
+	height:auto;
+	line-height:200px;
+	text-align:center;
+}
+.camp_pixel{
+	width: 28px !important;
+	height: 28px !important;
+	background-color:black;
+	border:1px solid grey;
+	float:left;
+}
