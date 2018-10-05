@@ -87,9 +87,35 @@ function desrenderizar_snake() {	//Retira a cobra da página
 
 }
 
+function walk_cobra() {
+
+	for (var p = snake.length - 1; p >= 1; p--) {
+		if (p == 1) {
+			snake[p]['x'] += snake_direct['x'];
+			snake[p]['y'] += snake_direct['y'];
+		} else {
+			snake[p]['x'] = snake[p - 1]['x'];
+			snake[p]['y'] = snake[p - 1]['y'];
+		}
+
+		if (snake[p]['x'] < 1) {
+			snake[p]['x'] = campo_x;
+		} else if (snake[p]['x'] > campo_x) {
+			snake[p]['x'] = 1;
+		}
+
+		if (snake[p]['y'] < 1) {
+			snake[p]['y'] = campo_y;
+		} else if (snake[p]['y'] > campo_y) {
+			snake[p]['y'] = 1;
+		}
+	}
+
+}
+
 function rodar(){	//Função que cuida da atualização em "quadros" (renderização)
 	desrenderizar_snake();
-	//walk_cobra();
+	walk_cobra();
 	renderizar_cobra();
 }
 
@@ -97,4 +123,4 @@ function rodar(){	//Função que cuida da atualização em "quadros" (renderiza�
 iniciar_jogo();
 
 //Inicia o loop de atualização
-setInterval(rodar,500);
+setInterval(rodar,100);
