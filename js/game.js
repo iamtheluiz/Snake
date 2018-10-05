@@ -76,6 +76,17 @@ function renderizar_cobra(){	//Desenha a cobra na página
 
 }
 
+function desrenderizar_snake() {	//Retira a cobra da página
+
+	for (var c = 1; c <= (snake.length - 1); c++) {
+
+		var calda_cobra = document.getElementById(snake[c]['x'] + "_" + snake[c]['y']);
+		calda_cobra.setAttribute("class", "camp_pixel");
+
+	}
+
+}
+
 function rodar(){	//Função que cuida da atualização em "quadros" (renderização)
 	desrenderizar_snake();
 	//walk_cobra();
