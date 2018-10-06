@@ -179,8 +179,10 @@ function rodar(){	//Função que cuida da atualização em "quadros" (renderiza�
 	renderizar_cobra();
 }
 
-//Inicia o jogo
-iniciar_jogo();
+window.onload = function(){
+	//Inicia o jogo
+	iniciar_jogo();
 
-//Inicia o loop de atualização
-setInterval(rodar,100);
+	//Inicia o loop de atualização
+	setInterval(rodar,100);
+}
