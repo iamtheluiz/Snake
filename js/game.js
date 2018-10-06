@@ -159,6 +159,13 @@ function walk_cobra() {
 
 }
 
+function morreu() {
+
+	//Jogo acaba
+	console.log("Perdeeeuuu");
+	
+}
+
 function rodar(){	//Função que cuida da atualização em "quadros" (renderização)
 	desrenderizar_snake();
 	walk_cobra();
