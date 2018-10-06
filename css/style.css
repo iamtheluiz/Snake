@@ -1,24 +1,84 @@
 html{
 	background-color:black;
 	width:100%;
+	user-select: none;
 }
 #game{
 	margin:0 auto;
-	width:600px;
+	width:100%;
 	height:auto;
 	line-height:200px;
 	text-align:center;
 }
 .camp_pixel{
-	width: 28px !important;
-	height: 28px !important;
+	width: calc(100% / 20 - 2px) !important;
+	height: calc(100vw / 20 - 2px) !important;
 	background-color:black;
 	border:1px solid grey;
 	float:left;
+}
+@media (min-width: 750px) {
+	#game{
+		width:600px;
+	}
+	.camp_pixel{
+		height: calc(600px / 20 - 2px) !important;
+	}
 }
 .calda{
 	background-color:white;
 }
 .food{
 	background-color: red;
+}
+
+#game .left,#game .right,#game .topo{
+	float:left;
+	width: 50%;
+	height: 100%;
+	background-color: white !important;
+}
+#game .topo{
+	width:100%;
+	line-height: 100px;
+}
+#game .left{
+	line-height: 100px;
+	background-color: green !important;
+}
+#game .right{
+	line-height: 100px;
+	background-color: #D48E0F !important;
+}
+
+#game .left div{
+	width: 100%;
+	line-height: 50px;
+}
+
+#direcionais{
+	width: 100vw;
+	float:left;
+	text-align:center !important;
+}
+#direcionais button{
+    background-color:grey;
+    color:black;
+    width:20%;
+    height:calc(100vw/5);
+    border:2px black solid;
+    font-size:20pt;
+}
+.botao{
+	width: calc(100%/1.5);
+	margin:0 auto;
+	border-radius:500px;
+	background-color:darkgreen;
+	color:white;
+	cursor:pointer;
+}
+.botao span{
+	color:white;
+	font-size:25pt;
+	font-weight:bolder;
 }

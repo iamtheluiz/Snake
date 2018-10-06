@@ -1,15 +1,30 @@
 <!DOCTYPE html>
-<html lang="pt-br" onkeydown="mudar_direcao(event);">
+<html id="html" lang="pt-br">
 	<head>
 		<meta charset="UTF-8">
 		<title>Snake Game</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" type="text/css" href="css/style.css">
+		<link rel="manifest" href="manifest.json">
 	</head>
 	<body>
 		<div id="game">
+			<div class="topo">
+				<h1>Selecione sua plataforma!</h1>
+			</div>
+			<div id="phone" class="left">
+				<span>Smartphone</span>
+			</div>
+			<div id="pc" class="right">
+				<span>PC</span>
+			</div>
+		</div>
+		<div id="direcionais" class="direcionais">
 			
 		</div>
 		<!-- Import do script do jogo -->
+		<script src="pwabuilder-sw-register.js"></script>
+		<script src="js/manup.js"></script>
 		<script type="text/javascript" src="js/game.js"></script>
 	</body>
 </html>

@@ -2,8 +2,8 @@
 var game = document.getElementById("game");
 
 //Variaveis globais
-var campo_x = 20;		//Tamnho X do campo
-var campo_y = 20;		//Tamnho Y do campo
+var campo_x = 20;		//Tamanho X do campo
+var campo_y = 20;		//Tamanho Y do campo
 var pixel_size = 30;	//Tamanho do pixel na fola de estilos
 var pixel_border = 2;	//Tamanho da borda do pixel
 var snake = [];			//Inicializa o array da cobra
@@ -28,6 +28,10 @@ function iniciar_jogo(){	//Função que cuida da inicialização do jogo
 	//Cria o campo de jogo e inicia a cobra
 	criar_campo();
 	inicializar_cobra();
+
+	//Reinicia a direção
+	snake_direct['x'] = -1;
+	snake_direct['y'] = 0;
 
 }
 
@@ -144,9 +148,13 @@ function desrenderizar_snake() {	//Retira a cobra da página
 
 function mudar_direcao(tecla) {
 
-	tecla = tecla.code;
+	if(tecla > 0){
 
-	if (tecla == 'ArrowUp') {	//Seta para Cima
+	}else{
+		tecla = tecla.code;
+	}
+
+	if (tecla == 'ArrowUp' || tecla == 38) {	//Seta para Cima
 
 		if (snake_direct['x'] == 1 && snake_direct['y'] == 0) {
 
@@ -155,7 +163,7 @@ function mudar_direcao(tecla) {
 			snake_direct['y'] = 0;
 		}
 
-	} else if (tecla == 'ArrowRight') {	//Seta para Direita
+	} else if (tecla == 'ArrowRight' || tecla == 39) {	//Seta para Direita
 
 		if (snake_direct['x'] == 0 && snake_direct['y'] == -1) {
 
@@ -164,7 +172,7 @@ function mudar_direcao(tecla) {
 			snake_direct['y'] = 1;
 		}
 
-	} else if (tecla == 'ArrowLeft') {	//Seta para Esquerda
+	} else if (tecla == 'ArrowLeft' || tecla == 37) {	//Seta para Esquerda
 
 		if (snake_direct['x'] == 0 && snake_direct['y'] == 1) {
 
@@ -173,7 +181,7 @@ function mudar_direcao(tecla) {
 			snake_direct['y'] = -1;
 		}
 
-	} else if (tecla == 'ArrowDown') {	//Seta para Baixo
+	} else if (tecla == 'ArrowDown' || tecla == 40) {	//Seta para Baixo
 
 		if (snake_direct['x'] == -1 && snake_direct['y'] == 0) {
 
@@ -242,16 +250,127 @@ function spawn_food() {		//Coloca uma nova comida no campo
 }
 
 function rodar(){	//Função que cuida da atualização em "quadros" (renderização)
+
 	desrenderizar_snake();
 	walk_cobra();
 	spawn_food();
 	renderizar_cobra();
+
+}
+
+//Funções de movimentação em Smartphones
+
+var touch_x_start = 0;
+var touch_y_start = 0;
+var touch_x_end = 0;
+var touch_y_end = 0;
+
+function handleStart(event){
+
+	var pixel = event.changedTouches[0];
+
+	touch_x_start = pixel.clientX;
+	touch_y_start = pixel.clientY;
+
+}
+function handleEnd(event){
+
+	var pixel = event.changedTouches[0];
+
+	touch_x_end = pixel.clientX;
+	touch_y_end = pixel.clientY;
+
+	//Calculos
+
+	if(touch_y_start > touch_y_end){
+		var d_x = -1;
+		var t_x = touch_x_start - touch_x_end;
+	}else{
+		var d_x = 1;
+		var t_x = touch_x_end - touch_x_start;
+	}
+
+	if(touch_x_start > touch_x_end){
+		var d_y = -1;
+		var t_y = touch_y_start - touch_y_end;
+	}else{
+		var d_y = 1;
+		var t_y = touch_y_end - touch_y_start;
+	}
+
+	if(t_x > t_y){
+		snake_direct['x'] = d_x;
+		snake_direct['y'] = 0;
+	}else{
+		snake_direct['x'] = 0;
+		snake_direct['y'] = d_y;
+	}
+
+}
+function scroll_back(){
+	window.scrollTo(0, 5000000);
 }
 
 window.onload = function(){
-	//Inicia o jogo
-	iniciar_jogo();
+	
+	//Inicia o jogo configurado para PC
+	document.getElementById('pc').onclick = function (){
 
-	//Inicia o loop de atualização
-	setInterval(rodar,100);
+		var html = document.getElementById('html');
+		html.setAttribute('onkeydown','mudar_direcao(event)');
+
+		iniciar_jogo();
+
+		setInterval(rodar,100);
+	}
+
+	//Inicia o jogo configurado para celulares
+	document.getElementById('phone').onclick = function (){
+
+		//Zera oque tiver dentro
+		var phone = document.getElementById('phone');
+
+		//Coloca novas div's
+		var setas = document.createElement('div');
+		setas.setAttribute('id','setas');
+		setas.innerHTML = 'Botões';
+		phone.appendChild(setas);
+
+		var swipe = document.createElement('div');
+		swipe.setAttribute('id','swipe');
+		swipe.setAttribute('style','background-color: brown');
+		swipe.innerHTML = 'Deslizar';
+		phone.appendChild(swipe);
+
+		document.getElementById('html').style = 'height: 100.1vh !important';
+
+		//Jogar deslizando na tela
+		document.getElementById('swipe').onclick = function (){
+
+			var html = document.getElementById('html');
+			html.setAttribute('ontouchstart','handleStart(event)');
+			html.setAttribute('ontouchend','handleEnd(event)');
+
+			iniciar_jogo();
+
+			setInterval(rodar,100);
+			setInterval(scroll_back,100);
+
+		}
+
+		//Jogar com botões na tela
+		document.getElementById('setas').onclick = function (){
+
+			var direcionais = document.getElementById('direcionais');
+			direcionais.innerHTML = '<a onclick="mudar_direcao(38)">^</a><br><a onclick="mudar_direcao(37)"><-</a><a onclick="mudar_direcao(40)">v</a><a onclick="mudar_direcao(39)">-></a>';
+
+			iniciar_jogo();
+
+			setInterval(rodar,100);
+			setInterval(scroll_back,100);
+
+		}
+		
+	}
+
 }
