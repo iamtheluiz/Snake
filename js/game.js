@@ -12,6 +12,11 @@ snake_direct['x'] = -1;
 snake_direct['y'] = 0;
 var calda = 0;			//Dá o tamanho da cobra
 
+//Comida
+var st_food = false;
+var food_x = '';
+var food_y = '';
+
 var pixel_width = parseInt(pixel_size+pixel_border)+"px";
 var pixel_height = parseInt(pixel_size+pixel_border)+"px";
 
@@ -67,9 +72,16 @@ function renderizar_cobra(){	//Desenha a cobra na página
 
 	for (var c = 1; c <= (snake.length - 1); c++) {
 
+		//Caso a cobra passe por cima da comida, ela aumenta
+		if (snake[c]['x'] == food_x && snake[c]['y'] == food_y) {
+			comer();
+		}
+
+		//Coloca a cor na calda
 		var calda_cobra = document.getElementById(snake[c]['x'] + "_" + snake[c]['y']);
 		calda_cobra.setAttribute("class", "camp_pixel calda");
 
+		//Verifica se uma parte da cobra não bateu em outra
 		for (var i = 1; i <= (snake.length - 1); i++) {
 			if (i != c) {
 				if (snake[c]['x'] == snake[i]['x'] && snake[c]['y'] == snake[i]['y']) {
@@ -78,6 +90,44 @@ function renderizar_cobra(){	//Desenha a cobra na página
 			}
 		}
 	}
+
+}
+
+function comer(){	//Aumenta o tamanho da cobra
+
+	calda++;
+	snake[calda] = [];
+
+	if (snake[calda - 1]['x'] == snake[calda - 2]['x']) {
+		snake[calda]['x'] = snake[calda - 1]['x'];
+		if (snake[calda - 1]['y'] < snake[calda - 2]['y']) {
+			snake[calda]['y'] = snake[calda - 1]['y'] - 1;
+		} else {
+			snake[calda]['y'] = snake[calda - 1]['y'] + 1;
+		}
+	} else if (snake[calda - 1]['y'] == snake[calda - 2]['y']) {
+		snake[calda]['y'] = snake[calda - 1]['y'];
+		if (snake[calda - 1]['x'] < snake[calda - 2]['x']) {
+			snake[calda]['x'] = snake[calda - 1]['x'] - 1;
+		} else {
+			snake[calda]['x'] = snake[calda - 1]['x'] + 1;
+		}
+	}
+
+	if (snake[calda]['x'] < 1) {
+		snake[calda]['x'] = 20;
+	} else if (snake[calda]['x'] > 20) {
+		snake[calda]['x'] = 1;
+	}
+
+	if (snake[calda]['y'] < 1) {
+		snake[calda]['y'] = 20;
+	} else if (snake[calda]['y'] > 20) {
+		snake[calda]['y'] = 1;
+	}
+
+	//Diz que não existe mais comida no campo
+	st_food = false;
 
 }
 
@@ -173,9 +223,28 @@ function morreu() {
 
 }
 
+function spawn_food() {		//Coloca uma nova comida no campo
+
+	//Verifica se não existe comida no campo
+	if (st_food == false) {
+		st_food = true;
+
+		food_x = Math.floor(Math.random() * campo_x + 1); //Números de 1 ao tamanho do campo
+		food_y = Math.floor(Math.random() * campo_y + 1); //Números de 1 ao tamanho do campo
+
+		console.log(food);
+
+	}
+
+	var food = document.getElementById(food_x + "_" + food_y);
+	food.setAttribute("class", "camp_pixel food");
+
+}
+
 function rodar(){	//Função que cuida da atualização em "quadros" (renderização)
 	desrenderizar_snake();
 	walk_cobra();
+	spawn_food();
 	renderizar_cobra();
 }
 
