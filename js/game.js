@@ -17,14 +17,16 @@ var pixel_height = parseInt(pixel_size+pixel_border)+"px";
 
 function iniciar_jogo(){	//Função que cuida da inicialização do jogo
 
+	//Indica que a cobra inicia com o tamnho de 5 pixels
+	calda = 5;
+
+	//Cria o campo de jogo e inicia a cobra
 	criar_campo();
+	inicializar_cobra();
 
 }
 
 function criar_campo(){		//Cria o campo do jogo
-
-	//Indica que a cobra inicia com o tamnho de 5 pixels
-	calda = 5;
 
 	//Zera o campo
 	game.innerHTML = '';
@@ -44,9 +46,6 @@ function criar_campo(){		//Cria o campo do jogo
 		}
 
 	}
-
-	inicializar_cobra();
-	renderizar_cobra();
 
 }
 
