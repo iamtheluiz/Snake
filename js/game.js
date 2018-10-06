@@ -86,6 +86,53 @@ function desrenderizar_snake() {	//Retira a cobra da página
 
 }
 
+function mudar_direcao(tecla) {
+
+	tecla = tecla.code;
+
+	if (tecla == 'ArrowUp') {	//Seta para Cima
+
+		if (snake_direct['x'] == 1 && snake_direct['y'] == 0) {
+
+		} else {
+			snake_direct['x'] = -1;
+			snake_direct['y'] = 0;
+		}
+
+	} else if (tecla == 'ArrowRight') {	//Seta para Direita
+
+		if (snake_direct['x'] == 0 && snake_direct['y'] == -1) {
+
+		} else {
+			snake_direct['x'] = 0;
+			snake_direct['y'] = 1;
+		}
+
+	} else if (tecla == 'ArrowLeft') {	//Seta para Esquerda
+
+		if (snake_direct['x'] == 0 && snake_direct['y'] == 1) {
+
+		} else {
+			snake_direct['x'] = 0;
+			snake_direct['y'] = -1;
+		}
+
+	} else if (tecla == 'ArrowDown') {	//Seta para Baixo
+
+		if (snake_direct['x'] == -1 && snake_direct['y'] == 0) {
+
+		} else {
+			snake_direct['x'] = 1;
+			snake_direct['y'] = 0;
+		}
+
+	}
+
+	//console.log(snake_direct['x']+'_'+snake_direct['y']);
+	//console.log(tecla);
+
+}
+
 function walk_cobra() {
 
 	for (var p = snake.length - 1; p >= 1; p--) {
