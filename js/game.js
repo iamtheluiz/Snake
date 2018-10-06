@@ -50,11 +50,17 @@ function criar_campo(){		//Cria o campo do jogo
 }
 
 function inicializar_cobra(){	//Define os campos iniciais da cobra
+
+	//Zera o array da cobra
+	snake = [];
+
+	//Coloca os valores iniciais	
 	for (var o = 1; o <= calda; o++) {
 		snake[o] = [];
 		snake[o]['x'] = campo_x / 2 + (o - 1);
 		snake[o]['y'] = campo_y / 2;
 	}
+
 }
 
 function renderizar_cobra(){	//Desenha a cobra na página
@@ -163,7 +169,8 @@ function morreu() {
 
 	//Jogo acaba
 	console.log("Perdeeeuuu");
-	
+	iniciar_jogo();
+
 }
 
 function rodar(){	//Função que cuida da atualização em "quadros" (renderização)
