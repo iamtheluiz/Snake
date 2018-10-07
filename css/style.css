@@ -60,25 +60,19 @@ html{
 	width: 100vw;
 	float:left;
 	text-align:center !important;
+	display: none;
 }
 #direcionais button{
     background-color:grey;
     color:black;
-    width:20%;
-    height:calc(100vw/5);
-    border:2px black solid;
-    font-size:20pt;
+    width:20vw !important;
+    height:20vw;
+	border:2px black solid;
+	font-size:20pt;
 }
-.botao{
-	width: calc(100%/1.5);
-	margin:0 auto;
-	border-radius:500px;
-	background-color:darkgreen;
-	color:white;
-	cursor:pointer;
-}
-.botao span{
-	color:white;
-	font-size:25pt;
-	font-weight:bolder;
+@media (min-width: 750px) {
+	#direcionais button{
+		width:10vw !important;
+		height:10vw !important;
+	}
 }

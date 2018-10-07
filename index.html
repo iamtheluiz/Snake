@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html id="html" lang="pt-br">
+<html id="html" lang="pt-br" style="touch-action: none; overflow-x:hidden;">
 	<head>
 		<meta charset="UTF-8">
 		<title>Snake Game</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 		<link rel="stylesheet" type="text/css" href="css/style.css">
 		<link rel="manifest" href="manifest.json">
 	</head>
@@ -20,7 +20,10 @@
 			</div>
 		</div>
 		<div id="direcionais" class="direcionais">
-			
+			<button onclick="mudar_direcao(38)">^</button><br>
+			<button onclick="mudar_direcao(37)"><-</button>
+			<button onclick="mudar_direcao(40)">v</button>
+			<button onclick="mudar_direcao(39)">-></button>
 		</div>
 		<!-- Import do script do jogo -->
 		<script src="pwabuilder-sw-register.js"></script>

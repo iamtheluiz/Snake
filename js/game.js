@@ -25,6 +25,9 @@ function iniciar_jogo(){	//Função que cuida da inicialização do jogo
 	//Indica que a cobra inicia com o tamnho de 5 pixels
 	calda = 5;
 
+	//Tira a comida
+	st_food = false;
+
 	//Cria o campo de jogo e inicia a cobra
 	criar_campo();
 	inicializar_cobra();
@@ -342,7 +345,7 @@ window.onload = function(){
 		swipe.innerHTML = 'Deslizar';
 		phone.appendChild(swipe);
 
-		document.getElementById('html').style = 'height: 100.1vh !important';
+		//document.getElementById('html').style = 'height: 100.1vh !important';
 
 		//Jogar deslizando na tela
 		document.getElementById('swipe').onclick = function (){
@@ -354,7 +357,7 @@ window.onload = function(){
 			iniciar_jogo();
 
 			setInterval(rodar,100);
-			setInterval(scroll_back,100);
+			//setInterval(scroll_back,100);
 
 		}
 
@@ -362,12 +365,12 @@ window.onload = function(){
 		document.getElementById('setas').onclick = function (){
 
 			var direcionais = document.getElementById('direcionais');
-			direcionais.innerHTML = '<a onclick="mudar_direcao(38)">^</a><br><a onclick="mudar_direcao(37)"><-</a><a onclick="mudar_direcao(40)">v</a><a onclick="mudar_direcao(39)">-></a>';
+			direcionais.style.display = 'inline';
 
 			iniciar_jogo();
 
 			setInterval(rodar,100);
-			setInterval(scroll_back,100);
+			//setInterval(scroll_back,100);
 
 		}
 		
