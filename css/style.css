@@ -44,11 +44,11 @@ html{
 }
 #game .left{
 	line-height: 100px;
-	background-color: green !important;
+	background-color: #66F2C9 !important;
 }
 #game .right{
 	line-height: 100px;
-	background-color: #D48E0F !important;
+	background-color: #3B80AC !important;
 }
 
 #game .left div{
